@@ -21,3 +21,8 @@ $RECYCLE.BIN/
 # =========================
 # Operating System Files
 # =========================
+.vs/Points/v15/.suo
+bin/x64/Debug/AppX/vs.appxrecipe
+*.exe
+bin/x64/Debug/AppX/entrypoint/Points.exe
+*.exe

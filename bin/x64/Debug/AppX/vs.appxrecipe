@@ -10,7 +10,7 @@
     <PackageArchitecture>x64</PackageArchitecture>
     <PackageIdentityName>2974cb97-88e1-4884-a9ed-4002e5be5b87</PackageIdentityName>
     <PackageIdentityPublisher>CN=Boris</PackageIdentityPublisher>
-    <IntermediateOutputPath>H:\MyProj\Points_win10\Points\Points\obj\x64\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>H:\MyProj\Points\Points\obj\x64\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType>
     </RemoteDeploymentType>
     <PackageRegistrationPath>
@@ -18,8 +18,8 @@
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>H:\MyProj\Points_win10\Points\Points\bin\x64\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>1EC60CB6B7618FA945F06307A710049B8F5C1C64F1929AD8E9E7B099D811220E</RegisteredManifestChecksum>
+    <LayoutDir>H:\MyProj\Points\Points\bin\x64\Debug\AppX</LayoutDir>
+    <RegisteredManifestChecksum>D662AA6318D59A00A8BE83CC6B5086A4496A10F5BA2E02292B8161A8FA7333E9</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>2974cb97-88e1-4884-a9ed-4002e5be5b87_1.0.0.0_x64__kn4twcenmftk6</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>2974cb97-88e1-4884-a9ed-4002e5be5b87_kn4twcenmftk6!App</RegisteredUserModeAppID>
     <RegisteredPackageID>2974cb97-88e1-4884-a9ed-4002e5be5b87</RegisteredPackageID>
@@ -28,16 +28,16 @@
     <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="H:\MyProj\Points_win10\Points\Points\bin\x64\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="H:\MyProj\Points\Points\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-07-23T05:55:32.924</Modified>
+      <Modified>2018-07-23T06:43:57.026</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\bin\x64\Debug\Points.exe">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\bin\x64\Debug\Points.exe">
       <PackagePath>entrypoint\Points.exe</PackagePath>
-      <Modified>2018-07-23T05:55:31.431</Modified>
+      <Modified>2018-07-23T06:43:41.506</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Boris\.nuget\packages\microsoft.applicationinsights\2.1.0\lib\uap10.0\Microsoft.ApplicationInsights.dll">
       <PackagePath>Microsoft.ApplicationInsights.dll</PackagePath>
@@ -515,102 +515,102 @@
       <PackagePath>Microsoft.Graphics.Canvas.winmd</PackagePath>
       <Modified>2016-08-09T05:14:36.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\ApplicationInsights.config">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\ApplicationInsights.config">
       <PackagePath>ApplicationInsights.config</PackagePath>
       <Modified>2018-07-19T11:40:42.228</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square150x150Logo.scale-100.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square150x150Logo.scale-100.png">
       <PackagePath>Assets\Square150x150Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2018-07-19T11:40:42.472</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square150x150Logo.scale-125.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square150x150Logo.scale-125.png">
       <PackagePath>Assets\Square150x150Logo.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2018-07-19T11:40:42.551</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square150x150Logo.scale-150.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square150x150Logo.scale-150.png">
       <PackagePath>Assets\Square150x150Logo.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2018-07-19T11:40:42.679</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square150x150Logo.scale-400.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square150x150Logo.scale-400.png">
       <PackagePath>Assets\Square150x150Logo.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2018-07-19T11:40:42.788</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square310x310Logo.scale-100.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square310x310Logo.scale-100.png">
       <PackagePath>Assets\Square310x310Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2018-07-19T11:40:42.910</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square310x310Logo.scale-200.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square310x310Logo.scale-200.png">
       <PackagePath>Assets\Square310x310Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2018-07-19T11:40:43.036</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
       <Modified>2018-07-19T11:40:42.359</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2018-07-19T11:40:42.400</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2018-07-19T11:40:42.738</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2018-07-19T11:40:43.093</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2018-07-19T11:40:43.162</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2018-07-19T11:40:43.281</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2018-07-19T11:40:43.490</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Properties\Default.rd.xml">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
       <Modified>2018-07-19T11:40:46.015</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\bin\x64\Debug\Points.xr.xml">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\bin\x64\Debug\Points.xr.xml">
       <PackagePath>Points.xr.xml</PackagePath>
       <Modified>2018-07-19T11:42:03.629</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\bin\x64\Debug\App.xbf">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\bin\x64\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2018-07-19T13:23:36.104</Modified>
+      <Modified>2018-07-23T06:43:40.110</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\bin\x64\Debug\MainPage.xbf">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\bin\x64\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2018-07-19T13:23:36.191</Modified>
+      <Modified>2018-07-23T06:43:40.244</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.17134.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
       <Modified>2018-04-19T19:01:52.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\bin\x64\Debug\resources.pri">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-07-19T13:24:01.781</Modified>
+      <Modified>2018-07-23T06:43:53.612</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\bin\x64\Debug\Core\Points.exe">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\bin\x64\Debug\Core\Points.exe">
       <PackagePath>Points.exe</PackagePath>
-      <Modified>2018-07-23T05:55:32.793</Modified>
+      <Modified>2018-07-23T06:43:56.876</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

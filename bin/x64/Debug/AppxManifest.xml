@@ -11,7 +11,7 @@
   <mp:PhoneIdentity PhoneProductId="2974cb97-88e1-4884-a9ed-4002e5be5b87" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Points</DisplayName>
-    <PublisherDisplayName>Boris</PublisherDisplayName>
+    <PublisherDisplayName>Borys Malyi</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>

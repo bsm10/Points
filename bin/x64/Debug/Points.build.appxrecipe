@@ -10,22 +10,22 @@
     <PackageArchitecture>x64</PackageArchitecture>
     <PackageIdentityName>2974cb97-88e1-4884-a9ed-4002e5be5b87</PackageIdentityName>
     <PackageIdentityPublisher>CN=Boris</PackageIdentityPublisher>
-    <IntermediateOutputPath>H:\MyProj\Points_win10\Points\Points\obj\x64\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>H:\MyProj\Points\Points\obj\x64\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType></RemoteDeploymentType>
     <PackageRegistrationPath></PackageRegistrationPath>
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>H:\MyProj\Points_win10\Points\Points\bin\x64\Debug\AppX</LayoutDir>
+    <LayoutDir>H:\MyProj\Points\Points\bin\x64\Debug\AppX</LayoutDir>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="H:\MyProj\Points_win10\Points\Points\bin\x64\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="H:\MyProj\Points\Points\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\bin\x64\Debug\Points.exe">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\bin\x64\Debug\Points.exe">
       <PackagePath>entrypoint\Points.exe</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Boris\.nuget\packages\microsoft.applicationinsights\2.1.0\lib\uap10.0\Microsoft.ApplicationInsights.dll">
@@ -385,80 +385,80 @@
     <AppxPackagedFile Include="C:\Users\Boris\.nuget\packages\win2d.uwp\1.19.0\lib\uap10.0\Microsoft.Graphics.Canvas.winmd">
       <PackagePath>Microsoft.Graphics.Canvas.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\ApplicationInsights.config">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\ApplicationInsights.config">
       <PackagePath>ApplicationInsights.config</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square150x150Logo.scale-100.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square150x150Logo.scale-100.png">
       <PackagePath>Assets\Square150x150Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square150x150Logo.scale-125.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square150x150Logo.scale-125.png">
       <PackagePath>Assets\Square150x150Logo.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square150x150Logo.scale-150.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square150x150Logo.scale-150.png">
       <PackagePath>Assets\Square150x150Logo.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square150x150Logo.scale-400.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square150x150Logo.scale-400.png">
       <PackagePath>Assets\Square150x150Logo.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square310x310Logo.scale-100.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square310x310Logo.scale-100.png">
       <PackagePath>Assets\Square310x310Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square310x310Logo.scale-200.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square310x310Logo.scale-200.png">
       <PackagePath>Assets\Square310x310Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\Properties\Default.rd.xml">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\bin\x64\Debug\Points.xr.xml">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\bin\x64\Debug\Points.xr.xml">
       <PackagePath>Points.xr.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\bin\x64\Debug\App.xbf">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\bin\x64\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\bin\x64\Debug\MainPage.xbf">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\bin\x64\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.17134.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\bin\x64\Debug\resources.pri">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="H:\MyProj\Points_win10\Points\Points\bin\x64\Debug\Core\Points.exe">
+    <AppxPackagedFile Include="H:\MyProj\Points\Points\bin\x64\Debug\Core\Points.exe">
       <PackagePath>Points.exe</PackagePath>
     </AppxPackagedFile>
   </ItemGroup>
