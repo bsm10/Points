@@ -1,0 +1,33 @@
+﻿<Page x:ConnectionId='1'
+    x:Class="Points.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Points"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    mc:Ignorable="d"                         >
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="640">
+        <canvas:CanvasControl x:ConnectionId='2' x:Name="canvas" Margin="10,10,10,56"                    ClearColor="#FFF5FAF9"                                                          />
+        <!--<TextBlock x:Name="txtCoordinate" HorizontalAlignment="Left" Height="25" Margin="10,355,0,0" TextWrapping="Wrap" Text="{Binding PointerMovedEvent, ElementName=canvas, Mode=OneWay}" VerticalAlignment="Top" Width="214"/>-->
+    </Grid>
+    <Page.BottomAppBar>
+        <CommandBar VerticalAlignment="Stretch">
+            <CommandBar.SecondaryCommands>
+                <!--<AppBarToggleButton x:Uid="RepeatBox" x:Name="RepeatBox" Label="Повторять напоминание"/>-->
+                <AppBarButton x:Uid="Color1" Label="Color Player"  />
+                <AppBarButton x:Uid="Color2" Label="Color Computer"  />
+                <!--<AppBarButton x:Uid="CalendarButton" x:Name="CalendarButton" Label="Календарь"  />-->
+                
+
+            </CommandBar.SecondaryCommands>
+            <AppBarButton x:ConnectionId='3' x:Uid="AddAppBarButton" x:Name="NewGame" Label="New game" Icon="Document"                         />
+            <AppBarButton x:ConnectionId='4' x:Uid="AddAppBarButton" x:Name="SaveGame" Label="Save game" Icon="Save"                          />
+            <AppBarButton x:ConnectionId='5' x:Uid="AddAppBarButton" x:Name="LoadGame"  Label="Load game" Icon="OpenFile"                          />
+            <AppBarButton x:ConnectionId='6' x:Uid="AddAppBarButton" x:Name="Autoplay" Label="Autoplay" Icon="Play"                          />
+        </CommandBar>
+
+    </Page.BottomAppBar>
+</Page>
+

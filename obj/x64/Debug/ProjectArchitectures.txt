@@ -1,0 +1,1 @@
+H:\MyProj\Points\Points\Points.csproj;x64
