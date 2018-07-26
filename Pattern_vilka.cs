@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Graphics.Canvas.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Points
 {
@@ -14,7 +16,7 @@ namespace Points
             //паттерн на диагональное расположение точек         *d   
             //                                                *  +  
             //                                             *  +  *               
-            iNumberPattern = 1;
+            NumberPattern = 1;
             
             var pat1 = from Dot d in get_non_blocked
                        where d.Own == Owner
@@ -95,7 +97,7 @@ namespace Points
             //  *  +  *  +   
             //  *        m
             //     * 
-            iNumberPattern = 938;
+            NumberPattern = 938;
             var pat938 = from Dot d in get_non_blocked
                          where d.Own == Owner
                              & aDots[d.x + 1, d.y - 1].Own == Owner & aDots[d.x + 1, d.y - 1].Blocked == false
@@ -166,7 +168,7 @@ namespace Points
             //     +  
             //  +  *
             //  *
-            iNumberPattern = 670;
+            NumberPattern = 670;
             var pat670 = from Dot d in get_non_blocked
                          where d.Own == Owner
                              & aDots[d.x, d.y + 2].Own == Owner
@@ -235,7 +237,7 @@ namespace Points
                                select d;
             if (pat670_2_3_4.Count() > 0) return new Dot(pat670_2_3_4.First().x + 1, pat670_2_3_4.First().y + 1);
             //============================================================================================================== 
-            iNumberPattern = 30;
+            NumberPattern = 30;
             var pat30 = from Dot d in get_non_blocked
                         where d.Own == Owner
                             & aDots[d.x - 1, d.y + 1].Own == Owner
@@ -292,7 +294,7 @@ namespace Points
                               select d;
             if (pat30_2_3_4.Count() > 0) return new Dot(pat30_2_3_4.First().x - 1, pat30_2_3_4.First().y - 1);
             //============================================================================================================== 
-            iNumberPattern = 295;
+            NumberPattern = 295;
             var pat295 = from Dot d in get_non_blocked
                          where d.Own == Owner
                              & aDots[d.x - 1, d.y].Own == enemy_own
@@ -361,7 +363,7 @@ namespace Points
                                select d;
             if (pat295_2_3_4.Count() > 0) return new Dot(pat295_2_3_4.First().x, pat295_2_3_4.First().y + 1);
             //============================================================================================================== 
-            iNumberPattern = 968;
+            NumberPattern = 968;
             var pat968 = from Dot d in get_non_blocked
                          where d.Own == Owner
 & aDots[d.x + 1, d.y - 2].Own == Owner
@@ -422,7 +424,7 @@ namespace Points
                                select d;
             if (pat968_2_3_4.Count() > 0) return new Dot(pat968_2_3_4.First().x, pat968_2_3_4.First().y + 1);
             //============================================================================================================== 
-            iNumberPattern = 880;
+            NumberPattern = 880;
             var pat880 = from Dot d in get_non_blocked
                          where d.Own == Owner
                              & aDots[d.x + 1, d.y + 2].Own == enemy_own & aDots[d.x + 1, d.y + 2].Blocked == false
@@ -499,7 +501,7 @@ namespace Points
                                select d;
             if (pat880_2_3_4.Count() > 0) return new Dot(pat880_2_3_4.First().x - 1, pat880_2_3_4.First().y + 1);
             //============================================================================================================== 
-            iNumberPattern = 775;
+            NumberPattern = 775;
             var pat775 = from Dot d in get_non_blocked
                          where d.Own == Owner
                              & aDots[d.x - 2, d.y].Own == Owner & aDots[d.x - 2, d.y].Blocked == false
@@ -560,7 +562,7 @@ namespace Points
                                select d;
             if (pat775_2_3_4.Count() > 0) return new Dot(pat775_2_3_4.First().x + 1, pat775_2_3_4.First().y - 1);
             //============================================================================================================== 
-            iNumberPattern = 685;
+            NumberPattern = 685;
             var pat685 = from Dot d in get_non_blocked
                          where d.Own == Owner
                              & aDots[d.x - 2, d.y + 3].Own == Owner & aDots[d.x - 2, d.y + 3].Blocked == false
@@ -633,7 +635,7 @@ namespace Points
                                select d;
             if (pat685_2_3_4.Count() > 0) return new Dot(pat685_2_3_4.First().x + 1, pat685_2_3_4.First().y - 2);
             //============================================================================================================== 
-            iNumberPattern = 632;
+            NumberPattern = 632;
             var pat632 = from Dot d in get_non_blocked
                          where d.Own == Owner
                              & aDots[d.x, d.y - 1].Own == enemy_own & aDots[d.x, d.y - 1].Blocked == false
@@ -698,7 +700,7 @@ namespace Points
                                select d;
             if (pat632_2_3_4.Count() > 0) return new Dot(pat632_2_3_4.First().x + 1, pat632_2_3_4.First().y);
             //============================================================================================================== 
-            iNumberPattern = 1938;
+            NumberPattern = 1938;
             var pat1938 = from Dot d in get_non_blocked
                           where d.Own == Owner
                               & aDots[d.x, d.y - 3].Own == Owner & aDots[d.x, d.y - 3].Blocked == false
@@ -771,7 +773,7 @@ namespace Points
                                 select d;
             if (pat1938_2_3_4.Count() > 0) return new Dot(pat1938_2_3_4.First().x - 1, pat1938_2_3_4.First().y + 1);
             //============================================================================================================== 
-            iNumberPattern = 1775;
+            NumberPattern = 1775;
             var pat1775 = from Dot d in get_non_blocked
                           where d.Own == Owner
                               & aDots[d.x + 1, d.y + 1].Own == Owner & aDots[d.x + 1, d.y + 1].Blocked == false
@@ -836,7 +838,7 @@ namespace Points
                                 select d;
             if (pat1775_2_3_4.Count() > 0) return new Dot(pat1775_2_3_4.First().x - 1, pat1775_2_3_4.First().y + 1);
             //============================================================================================================== 
-            iNumberPattern = 274;
+            NumberPattern = 274;
             var pat274 = from Dot d in get_non_blocked
                          where d.Own == Owner
                              & aDots[d.x - 1, d.y].Own == enemy_own & aDots[d.x - 1, d.y].Blocked == false
@@ -917,7 +919,7 @@ namespace Points
                                select d;
             if (pat274_2_3_4.Count() > 0) return new Dot(pat274_2_3_4.First().x, pat274_2_3_4.First().y + 1);
             //============================================================================================================== 
-            iNumberPattern = 44;
+            NumberPattern = 44;
             var pat44 = from Dot d in get_non_blocked
                         where d.Own == Owner
                             & aDots[d.x - 1, d.y + 2].Own == Owner & aDots[d.x - 1, d.y + 2].Blocked == false

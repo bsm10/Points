@@ -26,3 +26,11 @@ bin/x64/Debug/AppX/vs.appxrecipe
 *.exe
 bin/x64/Debug/AppX/entrypoint/Points.exe
 *.exe
+.vs/Points/v15/Server/sqlite3/db.lock
+*.ide
+.vs/Points/v15/Server/sqlite3/storage.ide-shm
+*.ide-wal
+*.cache
+obj/ARM/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.cache
+obj/ARM/Debug/XamlSaveStateFile.xml

@@ -9,7 +9,7 @@ namespace Points
     {
         private Dot CheckPatternMove(int Owner)//паттерны без вражеской точки
         {
-            iNumberPattern = 1;
+            NumberPattern = 1;
             var pat1 = from Dot d in aDots
                          where d.Own == 0
                              & aDots[d.x - 1, d.y + 1].Own == Owner & aDots[d.x - 1, d.y + 1].Blocked == false
@@ -44,7 +44,7 @@ namespace Points
                                select d;
             if (pat1_2_3_4.Count() > 0) return new Dot(pat1_2_3_4.First().x, pat1_2_3_4.First().y);
             //============================================================================================================== 
-            iNumberPattern = 883;
+            NumberPattern = 883;
             var pat883 = from Dot d in aDots
                          where d.Own == Owner
                              & aDots[d.x + 1, d.y].Own == 0 & aDots[d.x + 1, d.y].Blocked == false
@@ -79,7 +79,7 @@ namespace Points
             //=================================================================================
             // 0d край доски
             // m   *
-            iNumberPattern = 2;
+            NumberPattern = 2;
             var pat2 = from Dot d in aDots
                          where d.Own == Owner & d.y==0 & d.x>0 & d.x< iBoardWidth
                              & aDots[d.x + 1, d.y + 1].Own == Owner & aDots[d.x + 1, d.y + 1].Blocked == false
@@ -121,7 +121,7 @@ namespace Points
             //       *
             //     m
             //  d*
-            iNumberPattern = 4;
+            NumberPattern = 4;
             var pat4 = from Dot d in aDots
                        where d.Own == Owner
                            & aDots[d.x, d.y - 1].Own == 0 & aDots[d.x, d.y - 1].Blocked == false
@@ -218,7 +218,7 @@ namespace Points
             //if (pat6_2_3_4.Count() > 0) return new Dot(pat6_2_3_4.First().x - 1, pat6_2_3_4.First().y + 1);
             //============================================================================================================== 
             //d*  m  *
-            iNumberPattern = 7;
+            NumberPattern = 7;
             var pat7 = from Dot d in aDots
                          where d.Own == Owner
                              & aDots[d.x + 1, d.y].Own == 0 & aDots[d.x + 1, d.y].Blocked == false
@@ -244,7 +244,7 @@ namespace Points
             // m 
             //
             // d*
-            iNumberPattern = 8;
+            NumberPattern = 8;
             var pat8 = from Dot d in aDots
                          where d.Own == Owner
                              & aDots[d.x + 1, d.y - 3].Own == Owner & aDots[d.x + 1, d.y - 3].Blocked == false
@@ -297,7 +297,7 @@ namespace Points
                 //        d*  
                 //     m
                 //============================================================================================================== 
-            iNumberPattern = 9;
+            NumberPattern = 9;
             var pat9 = from Dot d in aDots
                          where d.Own == Owner
                              & aDots[d.x - 1, d.y - 1].Own == Owner & aDots[d.x - 1, d.y - 1].Blocked == false
@@ -351,7 +351,7 @@ namespace Points
         private List<Dot> CheckPattern2Move(int Owner) //проверка хода на гарантированное окружение(когда точки находятся через две клетки) 
         {
             List<Dot> ld = new List<Dot>();
-            iNumberPattern = 1;
+            NumberPattern = 1;
             var pat1 = from Dot d in aDots
                        where d.Own == Owner
                              & aDots[d.x, d.y].IndexRelation == aDots[d.x + 2, d.y - 1].IndexRelation
@@ -361,7 +361,7 @@ namespace Points
                        select d;
             AddToList(ld, pat1, 1, 0);
             //-----------------------------------------------------------------------------
-            iNumberPattern = 2;
+            NumberPattern = 2;
             var pat2 = from Dot d in aDots
                        where d.Own == Owner
                             & d.IndexRelation == aDots[d.x + 2, d.y].IndexRelation
@@ -389,7 +389,7 @@ namespace Points
                        select d;
             AddToList(ld, pat4, 1, 0);
             //-----------------------------------------------------------------------------
-            iNumberPattern = 5;
+            NumberPattern = 5;
             var pat5 = from Dot d in aDots
                          where d.Own == Owner
                             & d.IndexRelation == aDots[d.x + 1, d.y + 2].IndexRelation
@@ -399,7 +399,7 @@ namespace Points
                          select d;
             AddToList(ld, pat5, 0, 1);
             //-----------------------------------------------------------------------------
-            iNumberPattern = 6;
+            NumberPattern = 6;
             var pat6 = from Dot d in aDots
                        where d.Own == Owner
                           & d.IndexRelation == aDots[d.x, d.y + 2].IndexRelation
@@ -409,7 +409,7 @@ namespace Points
                        select d;
             AddToList(ld, pat6, 0, 1);
             //-----------------------------------------------------------------------------
-            iNumberPattern = 7;
+            NumberPattern = 7;
             var pat7 = from Dot d in aDots
                        where d.Own == Owner
                           & d.IndexRelation == aDots[d.x, d.y + 2].IndexRelation
@@ -419,7 +419,7 @@ namespace Points
                        select d;
             AddToList(ld, pat7, 0, 1);
             //-----------------------------------------------------------------------------
-            iNumberPattern = 8;
+            NumberPattern = 8;
             var pat8 = from Dot d in aDots
                          where d.Own == Owner
                             & d.IndexRelation == aDots[d.x - 1, d.y + 2].IndexRelation
@@ -429,7 +429,7 @@ namespace Points
                          select d;
             AddToList(ld, pat8, 0, 1);
             //-----------------------------------------------------------------------------
-            iNumberPattern = 9;
+            NumberPattern = 9;
             var pat9 = from Dot d in aDots
                          where d.Own == Owner
                             & d.IndexRelation == aDots[d.x - 2, d.y + 1].IndexRelation
@@ -439,7 +439,7 @@ namespace Points
                          select d;
             AddToList(ld, pat9, -1, 0);
             //-----------------------------------------------------------------------------
-            iNumberPattern = 10;
+            NumberPattern = 10;
             var pat10 = from Dot d in aDots
                        where d.Own == Owner
                           & d.IndexRelation == aDots[d.x - 2, d.y].IndexRelation
@@ -449,7 +449,7 @@ namespace Points
                        select d;
             AddToList(ld, pat10, -1, 0);
             //-----------------------------------------------------------------------------
-            iNumberPattern = 11;
+            NumberPattern = 11;
             var pat11 = from Dot d in aDots
                         where d.Own == Owner
                            & d.IndexRelation == aDots[d.x - 2, d.y].IndexRelation
@@ -459,7 +459,7 @@ namespace Points
                         select d;
             AddToList(ld, pat11, -1, 0);
             //-----------------------------------------------------------------------------
-            iNumberPattern = 12;
+            NumberPattern = 12;
             var pat12 = from Dot d in aDots
                          where d.Own == Owner
                          & d.IndexRelation == aDots[d.x - 2, d.y - 1].IndexRelation
@@ -469,7 +469,7 @@ namespace Points
                          select d;
             AddToList(ld, pat12, -1, 0);
             //-----------------------------------------------------------------------------
-            iNumberPattern = 13;
+            NumberPattern = 13;
             var pat13 = from Dot d in aDots
                              where d.Own == Owner
                              & d.IndexRelation == aDots[d.x - 1, d.y - 2].IndexRelation
@@ -479,7 +479,7 @@ namespace Points
                              select d;
             AddToList(ld, pat13, 0, -1);
             //-----------------------------------------------------------------------------
-            iNumberPattern = 14;
+            NumberPattern = 14;
             var pat14 = from Dot d in aDots
                                where d.Own == Owner
                                & d.IndexRelation == aDots[d.x, d.y - 2].IndexRelation
@@ -489,7 +489,7 @@ namespace Points
                                select d;
             AddToList(ld, pat14, 0, -1);
             //-----------------------------------------------------------------------------
-            iNumberPattern = 15;
+            NumberPattern = 15;
             var pat15 = from Dot d in aDots
                         where d.Own == Owner
                         & d.IndexRelation == aDots[d.x, d.y - 2].IndexRelation
@@ -499,7 +499,7 @@ namespace Points
                         select d;
             AddToList(ld, pat15, 0, -1);
             //-----------------------------------------------------------------------------
-            iNumberPattern = 16;
+            NumberPattern = 16;
             var pat16 = from Dot d in aDots
                          where d.Own == Owner
                             & d.IndexRelation == aDots[d.x + 1, d.y - 2].IndexRelation
@@ -509,7 +509,7 @@ namespace Points
                          select d;
             AddToList(ld, pat16, 0, -1);
             //-----------------------------------------------------------------------------
-            iNumberPattern = 17;
+            NumberPattern = 17;
             var pat17 = from Dot d in aDots
                              where d.Own == Owner
                                 & d.IndexRelation == aDots[d.x + 2, d.y - 1].IndexRelation

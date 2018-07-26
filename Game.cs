@@ -106,13 +106,15 @@ namespace Points
         public int count_blocked1, count_blocked2;
         public int count_dot1, count_dot2;//количество поставленных точек
 
-        private CanvasControl canvasCtrl;
-        private int _pause = 10;
+        private CanvasControl canvas;
+        private TextBlock textstatus;
+
+        //private int _pause = 10;
 
 #if DEBUG
         //public Form f = new Form2();
 #endif
-        private int iNumberPattern;
+        //private int iNumberPattern;
 
 #if DEBUG
         Stopwatch stopWatch = new Stopwatch();//для диагностики времени выполнения
@@ -120,12 +122,18 @@ namespace Points
         Stopwatch sW2 = new Stopwatch();
 #endif
 
-        public Game(CanvasControl CanvasGame, int boardWidth, int boardHeight)
+        //public Game(CanvasControl CanvasGame, int boardWidth, int boardHeight)
+        //{
+        //    canvasCtrl = CanvasGame;
+        //    NewGame(boardWidth, boardHeight);
+
+        //}
+        public Game(CanvasControl CanvasCtrl, TextBlock TextBlockCtrl)
         {
-            canvasCtrl = CanvasGame;
-            NewGame(boardWidth, boardHeight);
-            
+            canvas = CanvasCtrl;
+            textstatus = TextBlockCtrl;
         }
+
         public void SetLevel(int iLevel = 1)
         {
             switch (iLevel)
@@ -186,9 +194,9 @@ namespace Points
 
 
             float s1 = square1; float s2 = square2;
-            int pl1 = 0; int pl2 = 0;
-            if (enemy_move.Own == PLAYER_HUMAN) { pl1 = PLAYER_HUMAN; pl2 = PLAYER_COMPUTER; }
-            else if (enemy_move.Own == PLAYER_COMPUTER) { pl1 = PLAYER_COMPUTER; pl2 = PLAYER_HUMAN; }
+            //int pl1 = 0; int pl2 = 0;
+            //if (enemy_move.Own == PLAYER_HUMAN) { pl1 = PLAYER_HUMAN; pl2 = PLAYER_COMPUTER; }
+            //else if (enemy_move.Own == PLAYER_COMPUTER) { pl1 = PLAYER_COMPUTER; pl2 = PLAYER_HUMAN; }
             best_move = null;
             int depth = 0;
             var t1 = DateTime.Now.Millisecond;
@@ -243,7 +251,8 @@ namespace Points
         {
             String strDebug = String.Empty;
             Dot bm;
-            StatusMsg = "CheckMove(pl2,pl1)...";
+            SetStatusMsg("CheckMove(pl2,pl1)...");
+            
 #if DEBUG
         sW2.Start();
         /f.lblBestMove.Text="CheckMove(pl2,pl1)...";
@@ -287,7 +296,7 @@ namespace Points
             
 #endif
             #endregion
-            StatusMsg = "CheckPattern2Move проверяем ходы на два вперед...";
+            SetStatusMsg("CheckPattern2Move проверяем ходы на два вперед...");
 
             #region CheckPattern2Move проверяем ходы на два вперед
             List<Dot> empty_dots = aDots.EmptyNeibourDots(pl2);
@@ -327,7 +336,7 @@ namespace Points
 #endif
 
             #endregion
-            StatusMsg = "CheckPattern_vilochka...";
+            SetStatusMsg("CheckPattern_vilochka...");
             #region CheckPattern_vilochka
             bm = CheckPattern_vilochka(pl2);
             if (bm != null & aDots.Contains(bm))
@@ -365,7 +374,7 @@ namespace Points
             
 #endif
             #endregion
-            StatusMsg = "CheckPattern...";
+            SetStatusMsg("CheckPattern...");
             #region CheckPattern
             bm = CheckPattern(pl2);
             if (bm != null & aDots.Contains(bm))
@@ -890,43 +899,17 @@ aDots[d.x + 1, d.y - 1].Blocked == false & aDots[d.x + 1, d.y + 1].Blocked == fa
 #endif
             }
         }
-        public int pause
-        {
-            get
-            {
-                return _pause;
-                //
-            }
-            set
-            {
-                _pause = value;
-            }
-        }
-        private void Pause()
-        {
-#if DEBUG
-            //if (f.Pause>0)
-            //{
-                
-            //    pbxBoard.Invalidate();
-            //    //System.Threading.Thread.Sleep(f.Pause);
-            //}
-#endif
-        }
+
         public async Task Pause(double sec)
         {
-            canvasCtrl.Invalidate();
+            canvas.Invalidate();
             await Task.Delay(TimeSpan.FromSeconds(sec));
         }
         public void NewGame(int boardWidth, int boardHeight)
         {
-            //iMapSize = iBoardSize * iScaleCoef;
-            //aDots = new ArrayDots(iMapSize);
-            //iBoardSize = 15;
             aDots = new ArrayDots(boardWidth, boardHeight);
             iBoardWidth = boardWidth;
             iBoardHeight = boardHeight;
-            //aDots = new ArrayDots(iBoardSize);
             lnks = new List<Links>();
             dots_in_region = new List<Dot>();
             list_moves = new List<Dot>();
@@ -943,7 +926,7 @@ aDots[d.x + 1, d.y - 1].Blocked == false & aDots[d.x + 1, d.y + 1].Blocked == fa
         //f.Show();
 
 #endif
-            canvasCtrl.Invalidate();
+            canvas.Invalidate();
         }
         private bool GameOver()
         {
@@ -1184,7 +1167,7 @@ aDots[d.x + 1, d.y - 1].Blocked == false & aDots[d.x + 1, d.y + 1].Blocked == fa
         public void ResizeBoard(int boardWidth, int boardHeight)//изменение размера доски
         {
             NewGame(boardWidth, boardHeight);
-            canvasCtrl.Invalidate();
+            canvas.Invalidate();
         }
         public void UndoMove(int x, int y)//поле отмена хода
         {

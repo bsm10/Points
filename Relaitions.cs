@@ -8,7 +8,7 @@ namespace Points
     class Relaitions
     {
         public Dot d1, d2;
-        public int Own;
+        //public int Own;
         public enum Owner : int { None = 0, Player1 = 1, Player2 = 2 }
         public Relaitions(Dot d1,Dot d2)//конструктор класса
         {

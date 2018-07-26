@@ -662,3 +662,7 @@ H:\MyProj\Points\Points\obj\x64\Debug\MultipleQualifiersPerDimensionFound.txt
 H:\MyProj\Points\Points\obj\x64\Debug\resources.en-us.resfiles
 H:\MyProj\Points\Points\obj\x64\Debug\resources.en-us.resfiles.intermediate
 H:\MyProj\Points\Points\obj\x64\Debug\ProjectArchitectures.txt
+H:\MyProj\Points\Points\bin\x64\Debug\System.Console.dll
+H:\MyProj\Points\Points\bin\x64\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
+H:\MyProj\Points\Points\obj\x64\Debug\FxResources.System.Console.SR.resw
+H:\MyProj\Points\Points\obj\x64\Debug\FxResources.System.Runtime.InteropServices.RuntimeInformation.SR.resw

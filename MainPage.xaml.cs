@@ -42,15 +42,10 @@ namespace Points
         public MainPage()
         {
             InitializeComponent();
-            //double Xres = canvas.ActualWidth;
-            //double Yres = canvas.ActualHeight;
-            //double scl_coef = canvas.Dpi;//Xres / Yres;
-            //pixels = dips * dpi / 96
-            //Height = 4 * Yres / 5;
-            //Width = Height - 50;
 
-            game = new Game(canvas, boardWidth, boardHeight);
-            game.StatusMsg = "Game started!";
+            game = new Game(canvas, textstatus);
+            game.NewGame(boardWidth, boardHeight);
+            game.SetStatusMsg("Game started!");
             player_move = 2;
             DispatcherTimerSetup();
         }
@@ -81,24 +76,22 @@ namespace Points
             }
             catch (InvalidCastException ex)
             {
-                game.StatusMsg = ex.Message.ToString();
+                game.SetStatusMsg(ex.Message.ToString());
                 return;
             }
             
 
         }
 
-        private void canvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
+        private void Canvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             //var session = args.DrawingSession;
             args.DrawingSession.Clear(Colors.White);
             //session.Clear(Colors.White);
             game.DrawGame(sender, args.DrawingSession);
-            //game.cnvs = sender;
-            //game.drSession = args.DrawingSession;
         }
 
-        private async void canvas_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void Canvas_Tapped(object sender, TappedRoutedEventArgs e)
         {
             UIElement q = sender as CanvasControl;
             var mpos = e.GetPosition(q);
@@ -144,12 +137,6 @@ namespace Points
             {
                 pl_move = game.PickComputerMove(game.LastMove);
             }
-            //if (pl_move == null)
-            //{
-            //    //MessageBox.Show("You win!!! \r\n" + game.Statistic());
-            //    game.NewGame(boardWidth, boardHeight);
-            //    return 1;
-            //}
             pl_move.Own = Player;
 
             game.MakeMove(pl_move, Player);
@@ -158,32 +145,30 @@ namespace Points
             canvas.Invalidate();
             player_move = Player == 1 ? 2 : 1;
 
-
             if (game.gameover)
             {
-                game.StatusMsg = "Game over! \r\n" + game.Statistic();
+                game.SetStatusMsg("Game over! \r\n" + game.Statistic());
                 await game.Pause(5);
-                game = new Game(canvas, boardWidth, boardHeight);
-                game.StatusMsg = "New game started!";
+                game.NewGame(boardWidth, boardHeight);
+                game.SetStatusMsg("New game started!");
                 await game.Pause(1);
-
                 return 1;
             }
 
-            game.StatusMsg = "Move player" + player_move + "...";
+            game.SetStatusMsg("Move player" + player_move + "...");
 
             return 0;
         }
-        private void canvas_PointerMoved(object sender, PointerRoutedEventArgs e)
+        private void Canvas_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
             UIElement q = sender as CanvasControl;
             PointerPoint ptrPt = e.GetCurrentPoint(q);
-            //txtCoordinate.Text = game.TranslateCoordinates(ptrPt.Position).ToString();
         }
 
         private void NewGame_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            game = new Game(canvas, boardWidth, boardHeight);
+            //game = new Game(canvas, boardWidth, boardHeight);
+            game.NewGame(boardWidth, boardHeight);
         }
 
         private void SaveGame_Tapped(object sender, TappedRoutedEventArgs e)

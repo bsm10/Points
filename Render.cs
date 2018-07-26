@@ -14,32 +14,33 @@ namespace Points
 {
     public partial class Game
     {
-        private string msg = string.Empty;
-        public string StatusMsg
+        private string statusMsg = string.Empty;
+
+        public string GetStatusMsg()
         {
-          get
-            {
-                return msg;
-            }
-          set
-            {
-                msg = value;
-            }
+            return statusMsg;
+        }
+
+        public void SetStatusMsg(string value)
+        {
+            statusMsg = value;
+            textstatus.Text = statusMsg;
         }
 
         #region RENDER
 
-        private void DrawStatusMsg(string msg, CanvasDrawingSession drSession)
+        private void DrawStatusMsg(CanvasDrawingSession drSession)
         {
             CanvasTextFormat format = new CanvasTextFormat()
             {
                 FontFamily = "Arial",
                 FontSize = 0.3f
             };
-            if (canvasCtrl != null )
+            if (canvas != null )
             {
-                drSession.DrawText(msg, 0, iBoardHeight + startY, Colors.DarkGreen, format);
-                canvasCtrl.Invalidate();
+                
+                drSession.DrawText(GetStatusMsg(), 0, iBoardHeight + startY, Colors.DarkGreen, format);
+                canvas.Invalidate();
             }
         }
         
@@ -57,8 +58,9 @@ namespace Points
             //Отрисовка замкнутого региона игрока1
             DrawLinks(drawingSession);
             //drawingSession.DrawLine(0, 100, 100, 0, colorBoard, 5.0f);
+            
             //drawingSession.DrawText(StatusMsg, 0, iBoardHeight + startY , Colors.DarkGreen, format);
-            DrawStatusMsg(StatusMsg, drawingSession);
+   //         DrawStatusMsg(GetStatusMsg(), drawingSession);
         }
         public void DrawBoard(CanvasDrawingSession drawingSession)//рисуем доску из клеток
         {
@@ -161,8 +163,7 @@ namespace Points
         }
         public Point TranslateCoordinates(Point MousePos)
         {
-            Matrix3x2 transform;
-            Matrix3x2.Invert(_transform, out transform);
+            Matrix3x2.Invert(_transform, out Matrix3x2 transform);
             Vector2 v = Vector2.Transform(new Vector2((float)MousePos.X, (float)MousePos.Y), transform);
             Point result = new Point((int)Math.Round(v.X), (int)Math.Round(v.Y));
             return result;

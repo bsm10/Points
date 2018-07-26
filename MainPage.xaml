@@ -9,8 +9,9 @@
     mc:Ignorable="d" Unloaded="Page_Unloaded">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="640">
-        <canvas:CanvasControl x:Name="canvas" Margin="10,10,10,56" Draw="canvas_Draw" ClearColor="#FFF5FAF9" Tapped="canvas_Tapped" PointerMoved="canvas_PointerMoved"/>
-        <!--<TextBlock x:Name="txtCoordinate" HorizontalAlignment="Left" Height="25" Margin="10,355,0,0" TextWrapping="Wrap" Text="{Binding PointerMovedEvent, ElementName=canvas, Mode=OneWay}" VerticalAlignment="Top" Width="214"/>-->
+        <canvas:CanvasControl x:Name="canvas" Margin="10,10,10,56" Draw="Canvas_Draw" ClearColor="#FFF5FAF9" Tapped="Canvas_Tapped" PointerMoved="Canvas_PointerMoved"/>
+        <TextBlock x:Name="textstatus"  HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,589,0,0"/>
+
     </Grid>
     <Page.BottomAppBar>
         <CommandBar VerticalAlignment="Stretch">
@@ -19,7 +20,7 @@
                 <AppBarButton x:Uid="Color1" Label="Color Player"  />
                 <AppBarButton x:Uid="Color2" Label="Color Computer"  />
                 <!--<AppBarButton x:Uid="CalendarButton" x:Name="CalendarButton" Label="Календарь"  />-->
-                
+
 
             </CommandBar.SecondaryCommands>
             <AppBarButton x:Uid="AddAppBarButton" x:Name="NewGame" Label="New game" Icon="Document" Tapped="NewGame_Tapped" />
