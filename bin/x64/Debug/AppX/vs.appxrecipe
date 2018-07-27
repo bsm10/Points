@@ -31,13 +31,13 @@
     <AppXManifest Include="H:\MyProj\Points\Points\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-07-27T13:44:37.999</Modified>
+      <Modified>2018-07-27T14:34:11.124</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="H:\MyProj\Points\Points\bin\x64\Debug\Points.exe">
       <PackagePath>entrypoint\Points.exe</PackagePath>
-      <Modified>2018-07-27T13:44:35.477</Modified>
+      <Modified>2018-07-27T14:34:09.020</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Boris\.nuget\packages\microsoft.applicationinsights\2.6.4\lib\netstandard1.3\Microsoft.ApplicationInsights.dll">
       <PackagePath>Microsoft.ApplicationInsights.dll</PackagePath>
@@ -618,7 +618,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="H:\MyProj\Points\Points\bin\x64\Debug\Core\Points.exe">
       <PackagePath>Points.exe</PackagePath>
-      <Modified>2018-07-27T13:44:37.844</Modified>
+      <Modified>2018-07-27T14:34:10.967</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

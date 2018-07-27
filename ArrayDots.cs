@@ -46,29 +46,9 @@ namespace Points
     {
         private Dot[,] Dots;//основной массив, где хранятся точки
         int position = -1;
-        //private int nSize;//размер поля
         private int nWidth;
         private int nHeight;
 
-        //public ArrayDots(int size)
-
-        //{
-        //    int counter=0;
-        //    Dots = new Dot[size, size];
-        //    nSize = size;
-        //    nWidth = size;
-        //    nHeight = size;
-        //    for (int i = 0; i < size; i++)
-        //    {
-        //        for (int j = 0; j < size; j++)
-        //        {
-        //            Dots[i,j]=new Dot(i, j);
-        //            Dots[i,j].IndexDot = counter;
-        //            if(i==0 | i == (size-1) | j == 0 | j==(size-1)) Dots[i,j].Fixed=true;
-        //            counter += 1;
-        //        }
-        //    }
-        //}
         public ArrayDots(int width, int height)
 
         {
@@ -134,70 +114,6 @@ namespace Points
                 AddNeibor(Dots[dot.x, dot.y]);
             }
         }
-        //public void Add(int x, int y, int own)//меняет владельца точки
-        //{
-        //    Dots[x, y].Own = own;
-        //    if (own != 0) Dots[x, y].IndexRelation = Dots[x, y].IndexDot;
-        //    Dots[x, y].Blocked = false;
-        //    AddNeibor(Dots[x, y]);
-        //}
-        //private void AddNeibor(Dot dot, bool c)
-        //{
-        //    if (dot.x > 0 & dot.y > 0 & dot.x < nSize-1 & dot.y < nSize-1)
-        //    {    
-        //        Dot[] dts = new Dot[8] {Dots[dot.x + 1, dot.y], Dots[dot.x - 1, dot.y],
-        //                                Dots[dot.x, dot.y + 1], Dots[dot.x, dot.y - 1],
-        //                                Dots[dot.x+1, dot.y + 1], Dots[dot.x-1, dot.y - 1],
-        //                                Dots[dot.x+1, dot.y - 1 ], Dots[dot.x-1, dot.y + 1]};                                       
-
-        //        var q = from Dot d in dts where d.Blocked==false & d.Own == dot.Own select d;
-
-        //        foreach (Dot d in q)
-        //        {
-        //            if (dot.Rating>d.Rating) dot.Rating=d.Rating;
-        //            if(dot.NeiborDots.Contains(d)==false) dot.NeiborDots.Add(d);
-        //            if (d.NeiborDots.Contains(dot) == false) d.NeiborDots.Add(dot);
-        //        }
-        //    }
-        //    else if(dot.x==0)
-        //    {
-        //        if (Dots[dot.x+1,dot.y].Own == dot.Own) 
-        //        {
-        //            dot.NeiborDots.Add(Dots[dot.x + 1, dot.y]);
-        //            Dots[dot.x + 1, dot.y].NeiborDots.Add(dot);
-        //            Dots[dot.x+1,dot.y].Rating=0;
-        //        }
-        //    }
-        //    else if (dot.x == nSize-2)
-        //    {
-        //        if (Dots[dot.x - 1, dot.y].Own == dot.Own)
-        //        {
-        //            dot.NeiborDots.Add(Dots[dot.x + 1, dot.y]);
-        //            Dots[dot.x - 1, dot.y].NeiborDots.Add(dot);
-        //            Dots[dot.x - 1, dot.y].Rating = 0;
-        //        }
-        //    }
-        //    else if (dot.y == 0)
-        //    {
-        //        if (Dots[dot.x , dot.y+1].Own == dot.Own)
-        //        {
-        //            dot.NeiborDots.Add(Dots[dot.x, dot.y+1]);
-        //            Dots[dot.x, dot.y+1].NeiborDots.Add(dot);
-        //            Dots[dot.x, dot.y+1].Rating = 0;
-        //        }
-        //    }
-        //    else if (dot.y == nSize - 2)
-        //    {
-        //        if (Dots[dot.x, dot.y - 1].Own == dot.Own)
-        //        {
-        //            dot.NeiborDots.Add(Dots[dot.x, dot.y - 1]);
-        //            Dots[dot.x, dot.y - 1].NeiborDots.Add(dot);
-        //            Dots[dot.x, dot.y - 1].Rating = 0;
-        //        }
-        //    }
-        //    MakeIndexRelation(dot);
-        //}
-
         private void AddNeibor(Dot dot)
         {
             //выбрать соседние точки, если такие есть
@@ -247,8 +163,9 @@ namespace Points
         }
         public float Distance(Dot dot1, Dot dot2)//расстояние между точками
         {
-            return (float)Math.Sqrt(Math.Pow((dot1.x - dot2.x),2) + Math.Pow((dot1.y - dot2.y), 2));
+            return (float)Math.Sqrt(Math.Pow((dot1.x - dot2.x), 2) + Math.Pow((dot1.y - dot2.y), 2));
         }
+
         public bool Contains(Dot dot)//проверяет, есть ли точка с такими координатами в массиве
         {
             if (dot == null) return false;

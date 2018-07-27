@@ -22,8 +22,6 @@ namespace Points
 {
     public partial class Game
     {
-        //public const int (int)Player.DRAW = -1;
-        //public const int 
         public enum Player
         {
         NONE = 0,
@@ -36,12 +34,8 @@ namespace Points
 
         //-------------------------------------------------
         public int iScaleCoef = 1;//- коэффициент масштаба
-        //public int iBoardSize  ;//- количество клеток квадрата в длинну
         public int iBoardWidth ;//- количество клеток квадрата в длинну
         public int iBoardHeight ;//- количество клеток квадрата в длинну
-        //public int iMapSize;//- количество клеток квадрата в длинну - размер всей карты
-        //public const int iBoardSizeMin = 5;
-        //public const int iBoardSizeMax = 20;
 
         public float startX = -0.5f, startY = -0.5f;
         public ArrayDots aDots;//Основной массив, где хранятся все поставленные точки. С єтого массива рисуются все точки
@@ -79,9 +73,6 @@ namespace Points
         private float PointWidth = 0.20f;
         public Color colorBoard = Color.FromArgb(255, 150, 200, 200);//(Color.DarkSlateBlue, 0.08f);
         public Color colorDrawBrush = Colors.MediumPurple;
-        //public ICanvasBrush SolidBrush;
-        ////private SolidBrush drawBrush = new SolidBrush(Colors.MediumPurple);
-        //public Font drawFont = new Font("Arial", 0.22f);
         public bool Redraw { get; set; }
 
         //===============================================================================
@@ -104,12 +95,10 @@ namespace Points
         private DateTimeOffset lastTime;
 
         public int CurrentPlayerMove=2;
-        //private int _pause = 10;
 
 #if DEBUG
         //public Form f = new Form2();
 #endif
-        //private int iNumberPattern;
 
 #if DEBUG
         Stopwatch stopWatch = new Stopwatch();//для диагностики времени выполнения
@@ -117,12 +106,6 @@ namespace Points
         Stopwatch sW2 = new Stopwatch();
 #endif
 
-        //public Game(CanvasControl CanvasGame, int boardWidth, int boardHeight)
-        //{
-        //    canvasCtrl = CanvasGame;
-        //    NewGame(boardWidth, boardHeight);
-
-        //}
         public Game(CanvasControl CanvasCtrl, TextBlock TextBlockCtrl)
         {
             canvas = CanvasCtrl;
@@ -149,13 +132,6 @@ namespace Points
                     SkillNumSq = 2;//5;
                     break;
             }
-            //            Settings.Default.Level=iLevel;
-            //            Properties.Settings.Default.Save();
-            //#if DEBUG
-            //            f.numericUpDown2.Value = SkillDepth;
-            //            f.numericUpDown4.Value = SkillNumSq;
-            //            f.numericUpDown3.Value = SkillLevel;
-            //#endif
         }
         //  ************************************************
         public Dot PickComputerMove(Dot enemy_move)
@@ -190,9 +166,6 @@ namespace Points
 
 
             float s1 = square1; float s2 = square2;
-            //int pl1 = 0; int pl2 = 0;
-            //if (enemy_move.Own == (int)Player.HUMAN) { pl1 = (int)Player.HUMAN; pl2 = (int)Player.COMPUTER; }
-            //else if (enemy_move.Own == (int)Player.COMPUTER) { pl1 = (int)Player.COMPUTER; pl2 = (int)Player.HUMAN; }
             best_move = null;
             int depth = 0;
             var t1 = DateTime.Now.Millisecond;
@@ -212,7 +185,6 @@ namespace Points
             Dot dot1 = null, dot2 = null;
             //(int)Player.HUMAN - ставим в параметр - первым ходит игрок1(человек)
             Play(ref best_move, dot1, dot2, (int)Player.HUMAN, (int)Player.COMPUTER, ref depth, ref c1, lm, ref c_root);
-            //Play1(ref best_move, dot1, dot2, (int)Player.HUMAN, ref depth, ref c1, lm, ref c_root);
             if (best_move == null)
             {
                 //MessageBox.Show("best_move == null");
@@ -245,11 +217,12 @@ namespace Points
         //===============================================================================================
         private Dot BestMove(int pl1, int pl2)
         {
-            String strDebug = String.Empty;
+           
             Dot bm;
             SetStatusMsg("CheckMove(pl2,pl1)...");
             
 #if DEBUG
+        String strDebug = String.Empty;
         sW2.Start();
         /f.lblBestMove.Text="CheckMove(pl2,pl1)...";
         

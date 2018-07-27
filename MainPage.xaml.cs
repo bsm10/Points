@@ -20,7 +20,7 @@ namespace Points
         {
             InitializeComponent();
             game = new Game(canvas, textstatus);
-            game.NewGame(14, 19);
+            game.NewGame(4, 4);
             game.SetStatusMsg("Game started!");
         }
 
