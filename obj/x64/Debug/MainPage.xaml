@@ -26,7 +26,7 @@
             <AppBarButton x:ConnectionId='4' x:Uid="AddAppBarButton" x:Name="NewGame" Label="New game" Icon="Document"                         />
             <AppBarButton x:ConnectionId='5' x:Uid="AddAppBarButton" x:Name="SaveGame" Label="Save game" Icon="Save"                          />
             <AppBarButton x:ConnectionId='6' x:Uid="AddAppBarButton" x:Name="LoadGame"  Label="Load game" Icon="OpenFile"                          />
-            <AppBarButton x:ConnectionId='7' x:Uid="AddAppBarButton" x:Name="Autoplay" Label="Autoplay" Icon="Play"                          />
+            <AppBarButton x:ConnectionId='7' x:Uid="AddAppBarButton" x:Name="Autoplay" Label="Autoplay" Icon="Play"  />
         </CommandBar>
 
     </Page.BottomAppBar>

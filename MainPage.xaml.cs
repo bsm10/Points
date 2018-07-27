@@ -1,22 +1,9 @@
-﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.UI.Xaml;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using Microsoft.Graphics.Canvas.UI.Xaml;
 using Windows.UI;
 using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -28,147 +15,36 @@ namespace Points
     public sealed partial class MainPage : Page
     {
         Game game;
-        int boardWidth = 4;
-        int boardHeight = 4;
-        private int player_move;//переменная хранит значение игрока который делает ход
-        //int game_result;
-        DispatcherTimer timer = new DispatcherTimer();
-
-        private DateTimeOffset startTime;
-        private DateTimeOffset lastTime;
-
-        //private bool autoplay;
 
         public MainPage()
         {
             InitializeComponent();
-
             game = new Game(canvas, textstatus);
-            game.NewGame(boardWidth, boardHeight);
+            game.NewGame(14, 19);
             game.SetStatusMsg("Game started!");
-            player_move = 2;
-            DispatcherTimerSetup();
-        }
-        public void DispatcherTimerSetup()
-        {
-            timer = new DispatcherTimer();
-            timer.Tick += Timer_Tick;
-            timer.Interval = new TimeSpan(0, 0, 1);
-            startTime = DateTimeOffset.Now;
-            lastTime = startTime;
-            timer.Start();
-            ////IsEnabled should now be true after calling start
-            //TimerLog.Text += "dispatcherTimer.IsEnabled = " + dispatcherTimer.IsEnabled + "\n";
-        }
-
-        private async void Timer_Tick(object sender, object e)
-        {
-            //============Ход компьютера=================
-            try {
-                if (player_move == 2)
-                {
-                    if (await MoveGamer(2) == 1)
-                    {
-                        return;
-                    }
-                }
-
-            }
-            catch (InvalidCastException ex)
-            {
-                game.SetStatusMsg(ex.Message.ToString());
-                return;
-            }
-            
-
         }
 
         private void Canvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            //var session = args.DrawingSession;
             args.DrawingSession.Clear(Colors.White);
-            //session.Clear(Colors.White);
             game.DrawGame(sender, args.DrawingSession);
         }
 
         private async void Canvas_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            UIElement q = sender as CanvasControl;
-            var mpos = e.GetPosition(q);
-            game.MousePos = game.TranslateCoordinates(mpos);
-            Dot dot = new Dot((int)game.MousePos.X, (int)game.MousePos.Y);
-            if (game.MousePos.X > game.startX - 0.5f & game.MousePos.Y > game.startY - 0.5f)
-            {
-                switch (e.PointerDeviceType)
-                {
-                    case Windows.Devices.Input.PointerDeviceType.Mouse:
-                        break;
-                    case Windows.Devices.Input.PointerDeviceType.Pen:
-                        break;
-                    case Windows.Devices.Input.PointerDeviceType.Touch:
-                        break;
-                    default:
-                        break;
-                }
-
-                #region Ходы игроков
-                if (game.aDots[(int)game.MousePos.X, (int)game.MousePos.Y].Own > 0) return;//предовращение хода если клик был по занятой точке
-
-                if (player_move == 1 | player_move == 0)
-                {
-                    player_move = 1;
-                    if (await MoveGamer(1, new Dot((int)game.MousePos.X, (int)game.MousePos.Y, 1)) > 0)
-                    {
-                        return;
-                    }
-                }
-                #endregion
-
-
-            }
+            await game.MoveGamerHuman(e);
         }
-        private async Task<int> MoveGamer(int Player, Dot pl_move = null)
-        {
-            if (game.gameover)
-            {
-                return 1;
-            }
-            if (pl_move == null)
-            {
-                pl_move = game.PickComputerMove(game.LastMove);
-            }
-            pl_move.Own = Player;
 
-            game.MakeMove(pl_move, Player);
-            game.ListMoves.Add(pl_move);
-
-            canvas.Invalidate();
-            player_move = Player == 1 ? 2 : 1;
-
-            if (game.gameover)
-            {
-                game.SetStatusMsg("Game over! \r\n" + game.Statistic());
-                await game.Pause(5);
-                game.NewGame(boardWidth, boardHeight);
-                game.SetStatusMsg("New game started!");
-                await game.Pause(1);
-                return 1;
-            }
-
-            game.SetStatusMsg("Move player" + player_move + "...");
-
-            return 0;
-        }
         private void Canvas_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
-            UIElement q = sender as CanvasControl;
-            PointerPoint ptrPt = e.GetCurrentPoint(q);
+            //UIElement q = sender as CanvasControl;
+            //PointerPoint ptrPt = e.GetCurrentPoint(q);
         }
 
         private void NewGame_Tapped(object sender, TappedRoutedEventArgs e)
         {
             //game = new Game(canvas, boardWidth, boardHeight);
-            game.NewGame(boardWidth, boardHeight);
+            game.NewGame(game.iBoardWidth, game.iBoardHeight);
         }
 
         private void SaveGame_Tapped(object sender, TappedRoutedEventArgs e)
@@ -186,11 +62,6 @@ namespace Points
         {
             game.LoadGame();
             canvas.Invalidate();
-        }
-
-        private void Settings_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-
         }
     }
 }

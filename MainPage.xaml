@@ -26,7 +26,7 @@
             <AppBarButton x:Uid="AddAppBarButton" x:Name="NewGame" Label="New game" Icon="Document" Tapped="NewGame_Tapped" />
             <AppBarButton x:Uid="AddAppBarButton" x:Name="SaveGame" Label="Save game" Icon="Save" Tapped="SaveGame_Tapped" />
             <AppBarButton x:Uid="AddAppBarButton" x:Name="LoadGame"  Label="Load game" Icon="OpenFile" Tapped="LoadGame_Tapped" />
-            <AppBarButton x:Uid="AddAppBarButton" x:Name="Autoplay" Label="Autoplay" Icon="Play" Tapped="Settings_Tapped" />
+            <AppBarButton x:Uid="AddAppBarButton" x:Name="Autoplay" Label="Autoplay" Icon="Play"  />
         </CommandBar>
 
     </Page.BottomAppBar>

@@ -16,15 +16,20 @@ using Windows.UI.Xaml.Media;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Input;
 
 namespace Points
 {
     public partial class Game
     {
-        private const int PLAYER_DRAW = -1;
-        private const int PLAYER_NONE = 0;
-        private const int PLAYER_HUMAN = 1;
-        private const int PLAYER_COMPUTER = 2;
+        //public const int (int)Player.DRAW = -1;
+        //public const int 
+        public enum Player
+        {
+        NONE = 0,
+        HUMAN = 1, 
+        COMPUTER = 2
+        }
         public int SkillLevel = 5;
         public int SkillDepth = 5;
         public int SkillNumSq = 3;
@@ -43,26 +48,10 @@ namespace Points
         private List<Links> lnks;
         private Dot best_move; //ход который должен сделать комп
         private Dot last_move; //последний ход
-        private List<Dot> list_moves; //список ходов
         private int win_player;//переменная получает номер игрока, котрый окружил точки
 
         private string status = string.Empty;
-        //public string Status
-        //{
-        //    get
-        //    {
-        //        return status;
-        //    }
-
-        //    set
-        //    {
-        //        status = value;
-        //    }
-        //}
-        public List<Dot> ListMoves
-        {
-            get { return list_moves; }
-        }
+        public List<Dot> ListMoves { get; private set; }
         public Dot LastMove
         {
             get
@@ -109,6 +98,12 @@ namespace Points
         private CanvasControl canvas;
         private TextBlock textstatus;
 
+
+        DispatcherTimer timer = new DispatcherTimer();
+        private DateTimeOffset startTime;
+        private DateTimeOffset lastTime;
+
+        public int CurrentPlayerMove=2;
         //private int _pause = 10;
 
 #if DEBUG
@@ -178,10 +173,11 @@ namespace Points
             #endregion
             #region  Если ситуация проигрышная - сдаемся          
             var q1 = from Dot d in aDots
-                     where d.Own == PLAYER_COMPUTER && (d.Blocked == false)
+                         //where d.Own == (int)Player.COMPUTER && (d.Blocked == false)
+                     where d.Own ==(int) Player.COMPUTER && (d.Blocked == false)
                      select d;
             var q2 = from Dot d in aDots
-                     where d.Own == PLAYER_HUMAN && (d.Blocked == false)
+                     where d.Own ==(int) Player.HUMAN && (d.Blocked == false)
                      select d;
             float res1 = q2.Count();
             float res2 = q1.Count();
@@ -195,8 +191,8 @@ namespace Points
 
             float s1 = square1; float s2 = square2;
             //int pl1 = 0; int pl2 = 0;
-            //if (enemy_move.Own == PLAYER_HUMAN) { pl1 = PLAYER_HUMAN; pl2 = PLAYER_COMPUTER; }
-            //else if (enemy_move.Own == PLAYER_COMPUTER) { pl1 = PLAYER_COMPUTER; pl2 = PLAYER_HUMAN; }
+            //if (enemy_move.Own == (int)Player.HUMAN) { pl1 = (int)Player.HUMAN; pl2 = (int)Player.COMPUTER; }
+            //else if (enemy_move.Own == (int)Player.COMPUTER) { pl1 = (int)Player.COMPUTER; pl2 = (int)Player.HUMAN; }
             best_move = null;
             int depth = 0;
             var t1 = DateTime.Now.Millisecond;
@@ -214,15 +210,15 @@ namespace Points
                 //f.lstDbg1.Items.Clear();
 #endif
             Dot dot1 = null, dot2 = null;
-            //PLAYER_HUMAN - ставим в параметр - первым ходит игрок1(человек)
-            Play(ref best_move, dot1, dot2, PLAYER_HUMAN, PLAYER_COMPUTER, ref depth, ref c1, lm, ref c_root);
-            //Play1(ref best_move, dot1, dot2, PLAYER_HUMAN, ref depth, ref c1, lm, ref c_root);
+            //(int)Player.HUMAN - ставим в параметр - первым ходит игрок1(человек)
+            Play(ref best_move, dot1, dot2, (int)Player.HUMAN, (int)Player.COMPUTER, ref depth, ref c1, lm, ref c_root);
+            //Play1(ref best_move, dot1, dot2, (int)Player.HUMAN, ref depth, ref c1, lm, ref c_root);
             if (best_move == null)
             {
                 //MessageBox.Show("best_move == null");
                 var random = new Random(DateTime.Now.Millisecond);
                 var q = from Dot d in aDots//любая точка
-                        where d.Blocked == false & d.Own == PLAYER_NONE
+                        where d.Blocked == false & d.Own == (int)Player.NONE
                         orderby random.Next()
                         select d;
 
@@ -258,6 +254,7 @@ namespace Points
         /f.lblBestMove.Text="CheckMove(pl2,pl1)...";
         
 #endif
+
             #region CheckMove - проверка на окружение
             bm = CheckMove(pl2);
             if (bm != null)
@@ -297,7 +294,6 @@ namespace Points
 #endif
             #endregion
             SetStatusMsg("CheckPattern2Move проверяем ходы на два вперед...");
-
             #region CheckPattern2Move проверяем ходы на два вперед
             List<Dot> empty_dots = aDots.EmptyNeibourDots(pl2);
             List<Dot> lst_dots2;
@@ -459,10 +455,10 @@ namespace Points
         }
 
         // функция проверяет не делается ли ход в точку, которая на следующем ходу будет окружена
-        private bool CheckDot(Dot dot, int Player)
+        private bool CheckDot(Dot dot, int Plyr)
         {
-            int res = MakeMove(dot, Player);
-            int pl = Player == PLAYER_COMPUTER ? 1 : 2;
+            int res = MakeMove(dot, Plyr);
+            int pl = Plyr == (int)Player.COMPUTER ? 1 : 2;
             //if (win_player==pl || CheckMove(pl) != null) // первое условие - ход в уже оеруженный регион, второе окружен на следующем ходу
             if (win_player == pl)
             {
@@ -514,9 +510,9 @@ namespace Points
 #endif
 
             if (CheckDot(best_move, player2)) best_move = null;
-            if (best_move != null) return PLAYER_COMPUTER;
+            if (best_move != null) return (int)Player.COMPUTER;
             var qry = from Dot d in aDots
-                      where d.Own == PLAYER_NONE & d.Blocked == false & Math.Abs(d.x - lastmove.x) < SkillNumSq
+                      where d.Own == (int)Player.NONE & d.Blocked == false & Math.Abs(d.x - lastmove.x) < SkillNumSq
                                                                     & Math.Abs(d.y - lastmove.y) < SkillNumSq
                       orderby Math.Sqrt(Math.Pow(Math.Abs(d.x - lastmove.x), 2) + Math.Pow(Math.Abs(d.y - lastmove.y), 2))
                       select d;
@@ -530,22 +526,22 @@ namespace Points
                 {
 
                     //player2=1;
-                    player2 = player1 == PLAYER_HUMAN ? PLAYER_COMPUTER : PLAYER_HUMAN;
+                    player2 = player1 == (int)Player.HUMAN ? (int)Player.COMPUTER : (int)Player.HUMAN;
                     //if (count_moves>SkillLevel) break;
                     //**************делаем ход***********************************
                     res_last_move = MakeMove(d, player2);
                     count_moves++;
                     #region проверка на окружение
 
-                    if (win_player == PLAYER_COMPUTER)
+                    if (win_player == (int)Player.COMPUTER)
                     {
                         best_move = d;
                         UndoMove(d);
-                        return PLAYER_COMPUTER;
+                        return (int)Player.COMPUTER;
                     }
 
                     //если ход в заведомо окруженный регион - пропускаем такой ход
-                    if (win_player == PLAYER_HUMAN)
+                    if (win_player == (int)Player.HUMAN)
                     {
                         UndoMove(d);
                         continue;
@@ -593,7 +589,7 @@ namespace Points
                     //if (f.lstDbg1.Items.Count > 0) f.lstDbg1.Items.RemoveAt(f.lstDbg1.Items.Count - 1);
 #endif
                     if (count_moves > 8)//SkillLevel)
-                        return PLAYER_NONE;
+                        return (int)Player.NONE;
                     if (result != 0)
                     {
                         //best_move = enemy_move;
@@ -604,13 +600,13 @@ namespace Points
                 }
                 #endregion
             }
-            return PLAYER_NONE;
+            return (int)Player.NONE;
         }
 
         private int FindMove(ref Dot move, Dot last_mv)//возвращает Owner кто побеждает в результате хода
         {
             int depth = 0, counter = 0, counter_root = 1000, own;
-            own = PLAYER_HUMAN;//последним ходил игрок
+            own = (int)Player.HUMAN;//последним ходил игрок
             List<Dot> mvs = new List<Dot>();
             Dot[] ad = null;
             int minX = aDots.MinX();
@@ -624,7 +620,7 @@ namespace Points
                 if (i == 0)
                 {
                     var qry = from Dot d in aDots
-                              where d.Own == PLAYER_NONE & d.Blocked == false
+                              where d.Own == (int)Player.NONE & d.Blocked == false
                                                         & d.x <= maxX + 1 & d.x >= minX - 1
                                                         & d.y <= maxY + 1 & d.y >= minY - 1
                               orderby d.x
@@ -644,7 +640,7 @@ namespace Points
                 else if (i == 1)
                 {
                     var qry1 = from Dot d in aDots
-                               where d.Own == PLAYER_NONE & d.Blocked == false
+                               where d.Own == (int)Player.NONE & d.Blocked == false
                                                          & d.x <= maxX + 1 & d.x >= minX - 1
                                                          & d.y <= maxY + 1 & d.y >= minY - 1
                                orderby d.y descending
@@ -670,11 +666,11 @@ namespace Points
                         counter++;
                         switch (own)
                         {
-                            case PLAYER_HUMAN:
-                                own = PLAYER_COMPUTER;
+                            case (int)Player.HUMAN:
+                                own = (int)Player.COMPUTER;
                                 break;
-                            case PLAYER_COMPUTER:
-                                own = PLAYER_HUMAN;
+                            case (int)Player.COMPUTER:
+                                own = (int)Player.HUMAN;
                                 break;
                         }
                         //ход делает комп, если последним ходил игрок
@@ -694,7 +690,7 @@ namespace Points
                         {
                             move = null;
                             //UndoMove(d);
-                            //return d.Own == PLAYER_HUMAN ? PLAYER_COMPUTER : PLAYER_HUMAN;
+                            //return d.Own == (int)Player.HUMAN ? (int)Player.COMPUTER : (int)Player.HUMAN;
                             break;
                         }
                         if (d.Own == 1 & res_last_move != 0)
@@ -708,7 +704,7 @@ namespace Points
 #endif
                             }
                             //UndoMove(d);
-                            break;//return PLAYER_HUMAN;//побеждает игрок
+                            break;//return (int)Player.HUMAN;//побеждает игрок
                         }
                         else if (d.Own == 2 & res_last_move != 0 | d.Own == 1 & aDots[d.x, d.y].Blocked)
                         {
@@ -721,12 +717,12 @@ namespace Points
 #endif
                             }
                             //UndoMove(d);
-                            //return PLAYER_COMPUTER;//побеждает компьютер
+                            //return (int)Player.COMPUTER;//побеждает компьютер
                             break;
                         }
                         if (depth > SkillLevel * 100)//количество просчитываемых комбинаций
                         {
-                            //return PLAYER_NONE;
+                            //return (int)Player.NONE;
                             break;
                         }
 
@@ -734,7 +730,7 @@ namespace Points
                 }
             } while (true);
 
-            //return PLAYER_NONE;
+            //return (int)Player.NONE;
         }
         //===============================================================================================================
         private List<Dot> CheckRelation(int index)
@@ -789,7 +785,7 @@ aDots[d.x + 1, d.y - 1].Blocked == false & aDots[d.x + 1, d.y + 1].Blocked == fa
 | d.Blocked == false & aDots[d.x - 1, d.y - 1].Blocked == false & aDots[d.x - 1, d.y + 1].Blocked == false & d.Own == 0 & aDots[d.x - 1, d.y - 1].Own == Owner & aDots[d.x - 1, d.y + 1].Own == Owner
                                  select d :
                     from Dot d in aDots
-                    where d.Own == PLAYER_NONE & d.Blocked == false &
+                    where d.Own == (int)Player.NONE & d.Blocked == false &
                                             Math.Abs(d.x - LastMove.x) < 2 & Math.Abs(d.y - LastMove.y) < 2
                     select d;
 
@@ -831,7 +827,7 @@ aDots[d.x + 1, d.y - 1].Blocked == false & aDots[d.x + 1, d.y + 1].Blocked == fa
                         {
                             //делаем ход
                             int result_last_move = MakeMove(dot_move, Owner);
-                            int pl = Owner == PLAYER_COMPUTER ? PLAYER_HUMAN : PLAYER_COMPUTER;
+                            int pl = Owner == (int)Player.COMPUTER ? (int)Player.HUMAN : (int)Player.COMPUTER;
                             Dot dt = CheckMove(pl, false); // проверка чтобы не попасть в капкан
                             if (dt != null)
                             {
@@ -905,14 +901,103 @@ aDots[d.x + 1, d.y - 1].Blocked == false & aDots[d.x + 1, d.y + 1].Blocked == fa
             canvas.Invalidate();
             await Task.Delay(TimeSpan.FromSeconds(sec));
         }
+        public void DispatcherTimerSetup()
+        {
+            timer = new DispatcherTimer();
+            timer.Tick += Timer_Tick;
+            timer.Interval = new TimeSpan(0, 0, 1);
+            startTime = DateTimeOffset.Now;
+            lastTime = startTime;
+            timer.Start();
+        }
+
+        private async void Timer_Tick(object sender, object e)
+        {
+            //============Ход компьютера=================
+            try
+            {
+                if (CurrentPlayerMove == 2)
+                {
+                    if (await MoveGamer(2) == 1)
+                    {
+                        return;
+                    }
+                }
+            }
+            catch (InvalidCastException ex)
+            {
+                SetStatusMsg(ex.Message.ToString());
+                return;
+            }
+        }
+
+        public async Task MoveGamerHuman(TappedRoutedEventArgs e)
+        {
+            MousePos = TranslateCoordinates(e.GetPosition(canvas));
+            Dot dot = new Dot((int)MousePos.X, (int)MousePos.Y);
+            if (MousePos.X > startX - 0.5f & MousePos.Y > startY - 0.5f)
+            {
+                 #region Ходы игроков
+                if (aDots[(int)MousePos.X, (int)MousePos.Y].Own > 0)
+                {
+                    return;//предовращение хода если клик был по занятой точке
+                }
+
+                if (CurrentPlayerMove == 1 | CurrentPlayerMove == 0)
+                {
+                    CurrentPlayerMove = 1;
+                    if (await MoveGamer(1, new Dot((int)MousePos.X, (int)MousePos.Y, 1)) > 0)
+                    {
+                        return;
+                    }
+                }
+                #endregion
+            }
+
+        }
+
+        private async Task<int> MoveGamer(int Player, Dot pl_move = null)
+        {
+            if (gameover)
+            {
+                return 1;
+            }
+            if (pl_move == null)
+            {
+                pl_move = PickComputerMove(LastMove);
+            }
+            pl_move.Own = Player;
+
+            MakeMove(pl_move, Player);
+            ListMoves.Add(pl_move);
+
+            canvas.Invalidate();
+            CurrentPlayerMove = Player == 1 ? 2 : 1;
+
+            if (gameover)
+            {
+                SetStatusMsg("Game over! \r\n" + Statistic());
+                //timer.Stop();
+                await Pause(5);
+                NewGame(iBoardWidth, iBoardHeight);
+                SetStatusMsg("New game started!");
+                //await Pause(1);
+                return 1;
+            }
+
+            SetStatusMsg("Move player" + CurrentPlayerMove + "...");
+
+            return 0;
+        }
         public void NewGame(int boardWidth, int boardHeight)
         {
+            timer = null;//обнуляем таймер
             aDots = new ArrayDots(boardWidth, boardHeight);
             iBoardWidth = boardWidth;
             iBoardHeight = boardHeight;
             lnks = new List<Links>();
             dots_in_region = new List<Dot>();
-            list_moves = new List<Dot>();
+            ListMoves = new List<Dot>();
             count_dot1 = 0; count_dot2 = 0;
             startX = -0.5f;
             startY = -0.5f;
@@ -922,6 +1007,7 @@ aDots[d.x + 1, d.y - 1].Blocked == false & aDots[d.x + 1, d.y + 1].Blocked == fa
             SetLevel(3);
             Redraw = true;
             gameover = false;
+            DispatcherTimerSetup();
 #if DEBUG
         //f.Show();
 
@@ -931,7 +1017,7 @@ aDots[d.x + 1, d.y - 1].Blocked == false & aDots[d.x + 1, d.y + 1].Blocked == fa
         private bool GameOver()
         {
             var qry = from Dot d in aDots
-                      where d.Own == PLAYER_NONE & d.Blocked == false
+                      where d.Own == (int)Player.NONE & d.Blocked == false
                       select d;
             
             return (qry.Count() == 0);
@@ -1146,7 +1232,7 @@ aDots[d.x + 1, d.y - 1].Blocked == false & aDots[d.x + 1, d.y + 1].Blocked == fa
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         public void ScanBlockedFreeDots()//сканирует не занятые узлы на предмет блокировки
         {
-            var q = from Dot d in aDots where d.Own == PLAYER_NONE && d.Blocked == false select d;
+            var q = from Dot d in aDots where d.Own == (int)Player.NONE && d.Blocked == false select d;
             if (q.Count() == 0) return;
             foreach (Dot dot in q)
             {
@@ -1241,7 +1327,7 @@ aDots[d.x + 1, d.y - 1].Blocked == false & aDots[d.x + 1, d.y + 1].Blocked == fa
             ScanBlockedFreeDots();
             aDots.UnmarkAllDots();
             LinkDots();
-            last_move = list_moves.Count == 0 ? null : list_moves.Last();
+            last_move = ListMoves.Count == 0 ? null : ListMoves.Last();
         }
 
         //=========================================================================
@@ -1458,9 +1544,9 @@ aDots[d.x + 1, d.y - 1].Blocked == false & aDots[d.x + 1, d.y + 1].Blocked == fa
         //public string path_savegame = ApplicationData.Current.LocalFolder + @"\dots.dts";
         public async void SaveGame()
         {
-            byte[] saveData = new byte[list_moves.Count*3];
+            byte[] saveData = new byte[ListMoves.Count*3];
             int i = 0;
-            foreach(Dot d in list_moves)
+            foreach(Dot d in ListMoves)
             {
                 saveData[i++] = (byte)d.x;
                 saveData[i++] = (byte)d.y;
@@ -1495,7 +1581,7 @@ aDots[d.x + 1, d.y - 1].Blocked == false & aDots[d.x + 1, d.y + 1].Blocked == fa
         {
             aDots.Clear();
             lnks.Clear();
-            list_moves.Clear();
+            ListMoves.Clear();
             Dot d = null;
             try
             {
@@ -1509,7 +1595,7 @@ aDots[d.x + 1, d.y - 1].Blocked == false & aDots[d.x + 1, d.y + 1].Blocked == fa
                 {
                     d = new Dot((int)reader.ReadByte(), (int)reader.ReadByte(), (int)reader.ReadByte());
                     MakeMove(d, d.Own);
-                    list_moves.Add(aDots[d.x, d.y]);
+                    ListMoves.Add(aDots[d.x, d.y]);
                 }
                 last_move = d;
                 //CheckBlocked();//проверяем блокировку
