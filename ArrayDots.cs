@@ -300,7 +300,16 @@ namespace Points
             }
            
         }
-
+        /// <summary>
+        /// Возвращает список не занятых точек
+        /// </summary>
+        private List<Dot> Board_ValidMoves
+        {
+            get
+            {
+                return (from Dot d in Dots where d.ValidMove select d).ToList();
+            }
+        }
         //IEnumerator and IEnumerable require these methods.
         public IEnumerator GetEnumerator()
         {

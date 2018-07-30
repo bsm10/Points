@@ -220,7 +220,7 @@ namespace Points
            
             Dot bm;
             SetStatusMsg("CheckMove(pl2,pl1)...");
-            
+
 #if DEBUG
         String strDebug = String.Empty;
         sW2.Start();
@@ -228,7 +228,7 @@ namespace Points
         
 #endif
 
-            #region CheckMove - проверка на окружение
+            #region CheckMove - проверяет ход в результате которого окружение.Возвращает ход который завершает окружение
             bm = CheckMove(pl2);
             if (bm != null)
             {
@@ -273,7 +273,19 @@ namespace Points
 
             foreach (Dot dot in empty_dots)
             {
-                if (CheckDot(dot, pl2) == false) MakeMove(dot, pl2);
+                if (CheckDot(dot, pl2) == false)
+                {
+                    if (MakeMove(dot, pl2) != 0)
+                    {
+                        UndoMove(dot);
+                        #endregion
+                        return dot;
+                    }
+
+
+                    
+                }
+
                 lst_dots2 = CheckPattern2Move(pl2);
                 foreach (Dot nd in lst_dots2)
                 {
@@ -294,17 +306,7 @@ namespace Points
                 }
                 UndoMove(dot);
             }
-#if DEBUG
-            sW2.Stop();
-            strDebug = strDebug + "\r\nCheckPattern2Move(pl2) - " + sW2.Elapsed.Milliseconds.ToString();
-            //f.txtBestMove.Text = strDebug;
-            sW2.Reset();
-            sW2.Start();
-            //f.lblBestMove.Text = "CheckPattern_vilochka...";
-            
-#endif
-
-            #endregion
+        
             SetStatusMsg("CheckPattern_vilochka...");
             #region CheckPattern_vilochka
             bm = CheckPattern_vilochka(pl2);
@@ -427,13 +429,20 @@ namespace Points
             return null;
         }
 
-        // функция проверяет не делается ли ход в точку, которая на следующем ходу будет окружена
+        /// <summary>
+        /// функция проверяет не делается ли ход в точку, которая на следующем ходу будет окружена 
+        /// </summary>
+        /// <param name="dot">проверяемая точка</param>
+        /// <param name="Plyr">игрок, чья точка проверяется</param>
+        /// <returns></returns>
+        // 
+        //
         private bool CheckDot(Dot dot, int Plyr)
         {
             int res = MakeMove(dot, Plyr);
             int pl = Plyr == (int)Player.COMPUTER ? 1 : 2;
-            //if (win_player==pl || CheckMove(pl) != null) // первое условие - ход в уже оеруженный регион, второе окружен на следующем ходу
-            if (win_player == pl)
+            if (win_player==pl || CheckMove(pl) != null) // первое условие - ход в уже оеруженный регион, второе окружен на следующем ходу
+            //if (win_player == pl)
             {
                 UndoMove(dot);
                 return true; // да будет окружена
@@ -726,9 +735,97 @@ namespace Points
             return null;
             //return lstDots;
         }
+        public class DotEq : EqualityComparer<Dot>
+        {
+            public override int GetHashCode(Dot dot)
+            {
+                int hCode = dot.x ^ dot.y;
+                return hCode.GetHashCode();
+            }
+
+            public override bool Equals(Dot d1, Dot d2)
+            {
+                return (d1.x == d2.x & d1.y == d2.y & d1.Rating == d2.Rating);
+            }
+        }
+        private Dot ОбщаяТочкаSNWE(Dot d1, Dot d2)//*1d1* 
+        {
+            return NeiborDotsSNWE(d1).Intersect(NeiborDotsSNWE(d2), new DotEq()).FirstOrDefault();
+        }
+        private List<Dot> ОбщаяТочка(Dot d1, Dot d2)
+        {
+            return NeiborDots(d1).Intersect(NeiborDots(d2), new DotEq()).ToList();
+        }
+        private List<Dot> NeiborDotsSNWE(Dot dot)//SNWE -S -South, N -North, W -West, E -East
+        {
+            Dot[] dts = new Dot[4] {
+                                    aDots[dot.x + 1, dot.y],
+                                    aDots[dot.x - 1, dot.y],
+                                    aDots[dot.x, dot.y + 1],
+                                    aDots[dot.x, dot.y - 1]
+                                    };
+            return dts.ToList();
+        }
+        private List<Dot> NeiborDots(Dot dot)
+        {
+            Dot[] dts = new Dot[8] {
+                                    aDots[dot.x + 1, dot.y],
+                                    aDots[dot.x - 1, dot.y],
+                                    aDots[dot.x, dot.y + 1],
+                                    aDots[dot.x, dot.y - 1],
+                                    aDots[dot.x + 1, dot.y + 1],
+                                    aDots[dot.x - 1, dot.y - 1],
+                                    aDots[dot.x - 1, dot.y + 1],
+                                    aDots[dot.x + 1, dot.y - 1]
+                                    };
+            return dts.ToList();
+        }
         //==============================================================================================
         //проверяет ход в результате которого окружение.Возвращает ход который завершает окружение
         private Dot CheckMove(int Owner, bool AllBoard = true)
+        {
+            List<Dot> happy_dots = new List<Dot>();
+            var qry = from Dot d1 in aDots
+                      where d1.Own == Owner
+                      from Dot d2 in aDots
+                      where
+                            d2.IndexRelation == d1.IndexRelation
+                            && aDots.Distance(d1, d2) > 2
+                            && aDots.Distance(d1, d2) < 3
+                            && ОбщаяТочка(d1, d2).Where(dt => dt.Own == Owner).Count() == 0
+                            ||
+                            d2.IndexRelation == d1.IndexRelation
+                            && aDots.Distance(d1, d2) == 2
+                      from Dot d in aDots
+                      where d.ValidMove && aDots.Distance(d, d1) < 2 && aDots.Distance(d, d2) < 2
+                                && NeiborDotsSNWE(d).Where(dt => dt.Own == Owner).Count() <= 2
+                      select d;
+
+            foreach (Dot d in qry.Distinct(new DotEq()).ToList())
+            {
+                //делаем ход
+                int result_last_move = MakeMove(d, Owner);
+#if DEBUG
+                //if (f.chkMove.Checked) Pause();
+#endif
+                //-----------------------------------
+                if (result_last_move != 0 & aDots[d.x, d.y].Blocked == false)
+                {
+                    UndoMove(d);
+                    d.CountBlockedDots = result_last_move;
+                    happy_dots.Add(d);
+                    //break;
+                }
+                UndoMove(d);
+            }
+
+            //выбрать точку, которая максимально окружит
+            var x = happy_dots.Where(dd =>
+                    dd.CountBlockedDots == happy_dots.Max(dt => dt.CountBlockedDots));
+
+            return x.Count() > 0 ? x.First() : null;
+        }
+        private Dot CheckMove_old(int Owner, bool AllBoard = true)
         {
             var qry = AllBoard ? from Dot d in aDots
                                  where d.Blocked == false && d.Own == 0 &
@@ -783,6 +880,7 @@ aDots[d.x + 1, d.y - 1].Blocked == false & aDots[d.x + 1, d.y + 1].Blocked == fa
             }
             return null;
         }
+
         private Dot CheckPatternVilkaNextMove(int Owner)
         {
             var qry = from Dot d in aDots where d.Own == Owner & d.Blocked == false select d;
@@ -1028,27 +1126,33 @@ aDots[d.x + 1, d.y - 1].Blocked == false & aDots[d.x + 1, d.y + 1].Blocked == fa
             return false;
         }
         //------------------------------------------------------------------------------------
-        public void LinkDots()//устанавливает связь между двумя точками и возвращает массив связей 
+        /// <summary>
+        /// устанавливает связь между двумя точками и возвращает массив связей 
+        /// </summary>
+        private void LinkDots()
         {
-            var qry = from Dot d in aDots
-                      where d.BlokingDots.Count > 0
-                      select d;
-            Dot[] dts = qry.ToArray();
-            Links l;
-            foreach (Dot d in dts)
-            {
-                for (int i = 0; i < dts.Length; i++)
-                {
-                    if (d.Equals(dts[i]) == false & d.IsNeiborDots(dts[i]) & d.Blocked == false & dts[i].Blocked == false)
-                    {
-                        l = new Links(dts[i], d);
-                        if (l.LinkExist(lnks.ToArray()) == -1)
-                        {
-                            lnks.Add(l);
-                        }
-                    }
-                }
-            }
+            lnks.Clear();
+            var qry = from Dot d1 in aDots
+                      where d1.BlokingDots.Count > 0
+                      from Dot d2 in aDots
+                          //where d2.Own == d1.Own && d1.Blocked == d2.Blocked && d2.BlokingDots.Count > 0
+                      where d2.Own == d1.Own && d1.Blocked == d2.Blocked
+                      & aDots.Distance(d1, d2) < 2 & aDots.Distance(d1, d2) > 0 && d2.BlokingDots.Count > 0
+                      || d2.Own == d1.Own && d1.Blocked == d2.Blocked && aDots.Distance(d1, d2) == 1
+                      //|| !d1.Blocked & d2.Blocked & Distance(d1, d2) == 1
+
+                      select new Links(d1, d2);
+
+            var temp = qry.Distinct(new LinksComparer());
+            lnks = temp.ToList(); //обновляем основной массив связей - lnks              
+
+            qry = from Links l1 in lnks
+                  from Links l2 in lnks
+                  where l1.Dot1.Equals(l2.Dot1) && aDots.Distance(l1.Dot2, l2.Dot2) < 2
+                  select new Links(l1.Dot2, l2.Dot2);
+            lnks.AddRange(qry.ToList());
+
+
         }
         private float SquarePolygon(int nBlockedDots, int nRegionDots)
         {

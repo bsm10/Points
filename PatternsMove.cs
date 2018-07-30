@@ -347,8 +347,23 @@ namespace Points
             //=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
             return null;//если никаких паттернов не найдено возвращаем нуль
         }
-
         private List<Dot> CheckPattern2Move(int Owner) //проверка хода на гарантированное окружение(когда точки находятся через две клетки) 
+        {
+            var pat1 = from Dot d1 in aDots
+                       from Dot d2 in aDots
+                       from Dot d3 in aDots
+                       where d1.Own == d2.Own && d1.Own == Owner 
+                             && d1.IndexRelation == d2.IndexRelation
+                             && !d1.Blocked && !d2.Blocked && !d3.Blocked
+                             && d3.Own==0 
+                             && aDots.Distance(d1, d3) >= 1 && aDots.Distance(d1, d3) <= 1.5
+                             && aDots.Distance(d2, d3) >= 1 && aDots.Distance(d2, d3) <= 1.5
+
+                       select d3;
+
+            return pat1.ToList();
+        }
+        private List<Dot> CheckPattern2Move_old(int Owner) //проверка хода на гарантированное окружение(когда точки находятся через две клетки) 
         {
             List<Dot> ld = new List<Dot>();
             NumberPattern = 1;
